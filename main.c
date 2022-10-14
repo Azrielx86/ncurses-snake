@@ -45,7 +45,14 @@ int main(int argc, char const* argv[])
     init_pair(2, COLOR_GREEN, COLOR_RED);
 
     int code = snake_game();
+    free(snake);
+    free(fruit);
+    delwin(board);
+    delwin(w_game_over);
+    delwin(menu_mwin);
+
     endwin();
+    
     return code;
 }
 

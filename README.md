@@ -13,3 +13,7 @@ or
 ## Preview
 
 ![ncurses Snake](./snake.gif)
+
+## To do
+
+Add a game menu and scores

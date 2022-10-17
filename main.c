@@ -11,18 +11,16 @@ int score;
 int fruits;
 int exit_game = 1;
 
-char* game_over_txt[] = {
-"  ___    __    __  __  ____ ",
-" / __)  /__\\  (  \\/  )( ___)",
-"( (_-. /(__)\\  )    (  )__) ",
-" \\___/(__)(__)(_/\\/\\_)(____)",
-"  _____  _  _  ____  ____",
-" (  _  )( \\/ )( ___)(  _ \\",
-"  )(_)(  \\  /  )__)  )   /",
-" (_____)  \\/  (____)(_)\\_)",
-"",
-"Press enter to exit..."
-};
+char* game_over_txt[] = { "  ___    __    __  __  ____ ",
+                         " / __)  /__\\  (  \\/  )( ___)",
+                         "( (_-. /(__)\\  )    (  )__) ",
+                         " \\___/(__)(__)(_/\\/\\_)(____)",
+                         "  _____  _  _  ____  ____",
+                         " (  _  )( \\/ )( ___)(  _ \\",
+                         "  )(_)(  \\  /  )__)  )   /",
+                         " (_____)  \\/  (____)(_)\\_)",
+                         "",
+                         "Press enter to exit..." };
 
 int main(int argc, char const* argv[])
 {
@@ -69,10 +67,9 @@ int snake_game()
         box(w_game_over, 0, 0);
         refresh();
 
-        // mvwprintw(w_game_over, 1, 1, game_over_txt[1]);
         for (int i = 0; i < ARRAY_SIZE(game_over_txt); i++)
         {
-            mvwprintw(w_game_over, i + 1, 1, game_over_txt[i]);
+            mvwprintw(w_game_over, i + 1, 1, "%s", game_over_txt[i]);
         }
 
         wrefresh(w_game_over);
@@ -92,12 +89,10 @@ void init()
     box(board, 0, 0);
     mvwprintw(board, 0, (int)(COLS / 2) - 3, "Snake");
     refresh();
-    // wprintw(board, "Snake");
     wrefresh(board);
 
     fruit = malloc(sizeof(Fruit));
     spawn_fruit();
-    // draw_fruit();
 
     initMaxSize = 100;
     snake = malloc(initMaxSize * sizeof(Snake));
@@ -123,33 +118,38 @@ void init()
 
 int update()
 {
-    char ch;
+    int ch;
 
     switch (ch = getch())
     {
-    case (int)'w':
-        if (snake[0].dirY == 1) break;
+    case KEY_UP:
+        if (snake[0].dirY == 1)
+            break;
         snake[0].dirX = 0;
         snake[0].dirY = -1;
         break;
-    case (int)'s':
-        if (snake[0].dirY == -1) break;
+    case KEY_DOWN:
+        if (snake[0].dirY == -1)
+            break;
         snake[0].dirX = 0;
         snake[0].dirY = 1;
         break;
-    case (int)'a':
-        if (snake[0].dirX == 1) break;
+    case KEY_LEFT:
+        if (snake[0].dirX == 1)
+            break;
         snake[0].dirX = -1;
         snake[0].dirY = 0;
         break;
-    case (int)'d':
-        if (snake[0].dirX == -1) break;
+    case KEY_RIGHT:
+        if (snake[0].dirX == -1)
+            break;
         snake[0].dirX = 1;
         snake[0].dirY = 0;
         break;
+    case (int)'q':
+        return 1;
     case 27:
         return 1;
-        break;
     default:
         break;
     }
@@ -213,7 +213,6 @@ void spawn_fruit()
         fruit->x = rand() % COLS - 2;
         fruit->y = rand() % LINES - 2;
 
-        // TODO
         for (int i = 0; i < snakeSize; i++)
             if (fruit->x == snake[i].x || fruit->y == snake[i].y)
                 continue;

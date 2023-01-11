@@ -50,7 +50,7 @@ int main(int argc, char const* argv[])
     delwin(menu_mwin);
 
     endwin();
-    
+
     return code;
 }
 
@@ -268,6 +268,10 @@ int is_alive()
 
 int ms_sleep(int miliseconds)
 {
+    #if defined(_WIN32) || defined(__CYGWIN__)
+    Sleep(miliseconds);
+    return 0;
+    #else
     struct timespec time;
     int code;
 
@@ -282,4 +286,5 @@ int ms_sleep(int miliseconds)
     } while (code && errno == EINTR);
 
     return code;
+    #endif
 }

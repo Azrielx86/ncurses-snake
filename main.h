@@ -2,11 +2,18 @@
 #ifndef __SNAKE_H__
 #define __SNAKE_H__
 
+#if defined(_WIN32) || defined(__CYGWIN__)
+#include <curses.h>
+#include <windows.h>
+#define true 1
+#define false 0
+#else
 #include <ncurses.h>
+#endif
+
 #include <errno.h>
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 

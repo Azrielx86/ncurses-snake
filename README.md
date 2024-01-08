@@ -6,7 +6,11 @@ Snake game written in C using ncurses.
 
 On Linux
 
-    clang -lncurses main.c -o Snake
+    clang main.c -o Snake -lncurses
+
+If you have troubles compiling it on Linux, try this (idk why but in Gentoo -lncurses was not enough)
+
+    clang main.c -o Snake $(pkg-config --cflags --libs ncurses)
 
 On Windows
 

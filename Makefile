@@ -4,7 +4,7 @@ NCURSES_LIBS := -lncurses
 
 TARGET := Snake
 
-SRC := main.c
+SRC := main.c menu.c
 OBJ := $(SRC:.c=.o)
 
 all := $(TARGET)

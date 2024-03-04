@@ -1,8 +1,8 @@
 #include "main.h"
+#include "menu.h"
 
 WINDOW* board;
 WINDOW* w_game_over;
-WINDOW* menu_mwin;
 Snake* snake;
 Fruit* fruit;
 int initMaxSize;
@@ -42,16 +42,19 @@ int main()
     init_pair(1, COLOR_GREEN, COLOR_GREEN);
     init_pair(2, COLOR_GREEN, COLOR_RED);
 
-    int code = snake_game();
-    free(snake);
-    free(fruit);
-    delwin(board);
-    delwin(w_game_over);
-    delwin(menu_mwin);
+    int choice = display_menu();
+
+    if(choice == 0) {
+        snake_game();
+        free(snake);
+        free(fruit);
+        delwin(board);
+        delwin(w_game_over);
+    }
 
     endwin();
 
-    return code;
+    return 0;
 }
 
 int snake_game()

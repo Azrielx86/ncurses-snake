@@ -1,3 +1,5 @@
 .vscode
 Snake
 Snake.exe
+
+*.o

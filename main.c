@@ -22,7 +22,7 @@ char* game_over_txt[] = { "  ___    __    __  __  ____ ",
                          "",
                          "Press enter to exit..." };
 
-int main(int argc, char const* argv[])
+int main()
 {
     initscr();
     curs_set(0);
@@ -56,7 +56,7 @@ int main(int argc, char const* argv[])
 
 int snake_game()
 {
-    int ch;
+    int ch = 0;
     init();
     while (update() == 0);
     if (is_alive() == 1)
@@ -67,7 +67,7 @@ int snake_game()
         box(w_game_over, 0, 0);
         refresh();
 
-        for (int i = 0; i < ARRAY_SIZE(game_over_txt); i++)
+        for (size_t i = 0; i < ARRAY_SIZE(game_over_txt); i++)
         {
             mvwprintw(w_game_over, i + 1, 1, "%s", game_over_txt[i]);
         }

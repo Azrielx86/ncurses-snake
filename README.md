@@ -4,13 +4,15 @@ Snake game written in C using ncurses.
 
 ## Compilation
 
+You can compile this using `make` or with the following steps
+
 On Linux
 
-    clang main.c -o Snake -lncurses
+    clang main.c menu.c -o Snake -lncurses
 
 If you have troubles compiling it on Linux, try this (idk why but in Gentoo -lncurses was not enough)
 
-    clang main.c -o Snake $(pkg-config --cflags --libs ncurses)
+    clang main.c menu.c -o Snake $(pkg-config --cflags --libs ncurses)
 
 On Windows
 
@@ -30,4 +32,4 @@ To show more information like the board size, the fruit coordinates and the snak
 
 ## To do
 
-Add a game menu and scores
+Add score saving and loading

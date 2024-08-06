@@ -1,6 +1,7 @@
-CXX := gcc
-CXXFLAGS := -Wall -Wextra -pedantic -std=c17 -march=native -O2
-NCURSES_LIBS := -lncurses
+CXX := clang
+CXXFLAGS := -Wall -Wextra -pedantic -std=c17 -march=native -O2 -fsanitize=address
+NCURSES_LIBS := -lncurses -ltinfo
+LD_FLAGS := -fsanitize=address
 
 TARGET := Snake
 
@@ -10,7 +11,7 @@ OBJ := $(SRC:.c=.o)
 all := $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CXX) -o $@ $^ $(NCURSES_LIBS)
+	$(CXX) -o $@ $^ $(NCURSES_LIBS) $(LD_FLAGS)
 
 %.o: %.c
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
